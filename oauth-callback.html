@@ -1,1 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OAuth Callback</title>
+    <style>
+      body { font-family: sans-serif; margin: 40px; }
+      code { display:block; padding:12px; background:#f3f3f3; white-space:pre-wrap; }
+      button { padding:10px 14px; margin-top:10px; cursor:pointer; }
+    </style>
+  </head>
+  <body>
+    <h2>QuickBooks OAuth Callback</h2>
+    <p>Copy the values below into the desktop app.</p>
 
+    <h3>Realm ID</h3>
+    <code id="realm"></code>
+    <button onclick="copyText('realm')">Copy Realm ID</button>
+
+    <h3>Authorization Code</h3>
+    <code id="code"></code>
+    <button onclick="copyText('code')">Copy Code</button>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById("code").textContent = params.get("code") || "(missing)";
+      document.getElementById("realm").textContent = params.get("realmId") || "(missing)";
+
+      function copyText(id){
+        const t = document.getElementById(id).textContent;
+        navigator.clipboard.writeText(t);
+      }
+    </script>
+  </body>
+</html>
